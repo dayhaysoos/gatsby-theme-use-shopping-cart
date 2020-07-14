@@ -1,0 +1,9 @@
+{
+  "name": "gatsby-theme-use-shopping-cart",
+  "private": true,
+  "author": "Nick DeJesus",
+  "workspaces": [
+    "examples/*",
+    "packages/*"
+  ]
+}
