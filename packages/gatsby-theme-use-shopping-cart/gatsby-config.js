@@ -5,7 +5,6 @@ require("dotenv").config({
 module.exports = {
   plugins: [
     "gatsby-plugin-theme-ui",
-    `gatsby-plugin-sharp`,
     `gatsby-transformer-sharp`,
     `gatsby-plugin-react-helmet`,
     "gatsby-plugin-stripe",
@@ -15,6 +14,14 @@ module.exports = {
     //     stripePublicKey: process.env.STRIPE_API_PUBLIC,
     //   },
     // },
+    {
+      resolve: `gatsby-plugin-sharp`,
+      options: {
+        useMozJpeg: false,
+        stripMetadata: true,
+        defaultQuality: 75,
+      },
+    },
     {
       resolve: "gatsby-source-filesystem",
       options: {
