@@ -4,17 +4,15 @@
 
 This only works for Stripe's new Checkout API. If you create your products with "Orders" this will not work
 
-
 # Features
 
 - Creates GraphQL Nodes based off Stripe Product API
 
-# Install 
+# Install
 
-`yarn add gatsby-theme-stripe-storefront`
+`yarn add "gatsby-theme-use-shopping-cart"`
 
 # Usage
-
 
 You can get your Stripe API keys here:
 
@@ -30,7 +28,6 @@ STRIPE_API_PUBLIC=PUBLIC_KEY_HERE
 
 ```
 
-
 In your `gatsby-config.js`
 
 ```
@@ -41,7 +38,7 @@ require('dotenv').config({
 module.exports = {
   plugins: [
     {
-      resolve: 'gatsby-theme-stripe-storefront',
+      resolve: '"gatsby-theme-use-shopping-cart"',
       options: {
         stripePublicKey: process.env.STRIPE_API_PUBLIC,
         billingAddressCollection: 'required', // optional if you need billing addresses from customers
@@ -54,7 +51,6 @@ module.exports = {
 ```
 
 We intentionally avoid passing the stripeSecretKey in Gatsby config for security reasons.
-
 
 # Feedback
 

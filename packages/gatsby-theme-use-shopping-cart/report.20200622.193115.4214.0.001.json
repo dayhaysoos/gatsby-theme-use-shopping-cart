@@ -9,7 +9,7 @@
     "dumpEventTimeStamp": "1592868675296",
     "processId": 4214,
     "threadId": null,
-    "cwd": "/Users/nickdejesus/Code/gatsby/gatsby-theme-stripe/packages/gatsby-theme-stripe-storefront",
+    "cwd": "/Users/nickdejesus/Code/gatsby/gatsby-theme-stripe/packages/"gatsby-theme-use-shopping-cart"",
     "commandLine": [
       "/usr/local/bin/node",
       "/usr/local/lib/node_modules/yarn/lib/cli.js",
