@@ -1,28 +1,28 @@
-const path = require(`path`)
-require('dotenv').config({
+const path = require(`path`);
+require("dotenv").config({
   path: `.env.${process.env.NODE_ENV}`,
-})
+});
 
 const {
   createFilePath,
   createRemoteFileNode,
-} = require(`gatsby-source-filesystem`)
+} = require(`gatsby-source-filesystem`);
 
-const stripe = require('stripe')(process.env.STRIPE_API_SECRET)
+const stripe = require("stripe")(process.env.STRIPE_API_SECRET);
 
-const axios = require('axios')
+const axios = require("axios");
 
 const slugify = (str) => {
   const slug = str
     .toLowerCase()
-    .replace(/[^a-z0-9]+/g, '-')
-    .replace(/(^-|-$)+/g, '')
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/(^-|-$)+/g, "");
 
-  return `${slug}`.replace(/\/\/+/g, '/')
-}
+  return `${slug}`.replace(/\/\/+/g, "/");
+};
 
 exports.createSchemaCustomization = ({ actions }) => {
-  const { createTypes } = actions
+  const { createTypes } = actions;
 
   createTypes(`
 
@@ -32,6 +32,7 @@ exports.createSchemaCustomization = ({ actions }) => {
     product: Product
     priceID: String
     unit_amount: Int
+    livemode: Boolean
   }
 
   type ProductFields {
@@ -41,12 +42,12 @@ exports.createSchemaCustomization = ({ actions }) => {
   type Product implements Node {
     id: String!
     object: String
-    active: Boolean,
-    attributes: [String],
-    created: Int,
+    active: Boolean
+    attributes: [String]
+    created: Int
     description: String
-    images: [String],
-    livemode: Boolean,
+    images: [String]
+    livemode: Boolean
     name: String!
     statement_descriptor: String
     type: String!
@@ -55,13 +56,15 @@ exports.createSchemaCustomization = ({ actions }) => {
     productID: String!
     slug: String
     fields: ProductFields
+    childFile: File
+    price: Int
   }
 
   type Image {
     image: String
   }
-  `)
-}
+  `);
+};
 
 exports.sourceNodes = async ({
   actions,
@@ -70,25 +73,29 @@ exports.sourceNodes = async ({
   reporter,
 }) => {
   const pricesList = await stripe.prices.list({
-    expand: ['data.product'],
-  })
+    expand: ["data.product"],
+  });
 
-  pricesList.data.forEach((price) => {
-    const node = {
-      ...price,
-      id: createNodeId(`Price-${price.id}`),
-      priceID: price.id,
-      internal: {
-        type: 'Price',
-        contentDigest: createContentDigest(price),
-      },
+  for (priceItem in pricesList.data) {
+    const price = pricesList.data[priceItem];
+
+    if (price.product.active) {
+      const node = {
+        ...price,
+        id: createNodeId(`Price-${price.id}`),
+        priceID: price.id,
+        internal: {
+          type: "Price",
+          contentDigest: createContentDigest(price),
+        },
+      };
+      actions.createNode(node);
     }
-    actions.createNode(node)
-  })
-}
+  }
+};
 
 // placeholder for products that have been turned into GQL Nodes
-let products = []
+let products = [];
 
 exports.onCreateNode = async ({
   node,
@@ -99,9 +106,9 @@ exports.onCreateNode = async ({
   store,
   cache,
 }) => {
-  // only apply logic to Price nodes
-  if (node.internal.type === 'Price' && !products.includes(node.product.id)) {
-    const productNodeId = await createNodeId(`Product-${node.product.id}`)
+  // Create a unique Product for every Price
+  if (node.internal.type === "Price" && !products.includes(node.product.id)) {
+    const productNodeId = await createNodeId(`Product-${node.product.id}`);
 
     let fileNode = await createRemoteFileNode({
       url: node.product.images[0],
@@ -110,12 +117,12 @@ exports.onCreateNode = async ({
       createNodeId,
       cache,
       store,
-    })
+    });
     //if product isn't in the array, push the id into the array to keep track
-    await products.push(node.product.id)
+    await products.push(node.product.id);
 
     if (fileNode) {
-      node.localImage___NODE = fileNode.id
+      node.localImage___NODE = fileNode.id;
     }
 
     await createNode({
@@ -125,26 +132,26 @@ exports.onCreateNode = async ({
       slug: slugify(node.product.name),
       price: node.unit_amount,
       internal: {
-        type: 'Product',
+        type: "Product",
         contentDigest: createContentDigest(node.product),
       },
-    })
+    });
 
     await createNodeField({
       node: getNode(productNodeId),
-      name: 'price',
+      name: "price",
       value: node,
-    })
+    });
 
     createParentChildLink({
       parent: getNode(productNodeId),
       child: getNode(fileNode.id),
-    })
+    });
   }
-}
+};
 
 exports.createPages = async ({ graphql, actions }) => {
-  const { createPage } = actions
+  const { createPage } = actions;
   const result = await graphql(`
     query {
       allProduct {
@@ -155,7 +162,7 @@ exports.createPages = async ({ graphql, actions }) => {
         }
       }
     }
-  `)
+  `);
   result.data.allProduct.edges.forEach(({ node }) => {
     createPage({
       path: `/products/${node.slug}`,
@@ -163,6 +170,6 @@ exports.createPages = async ({ graphql, actions }) => {
       context: {
         slug: node.slug,
       },
-    })
-  })
-}
+    });
+  });
+};
