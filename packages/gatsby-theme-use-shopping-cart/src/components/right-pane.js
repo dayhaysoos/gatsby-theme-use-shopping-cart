@@ -9,18 +9,18 @@ const RightPane = () => {
     handleCartClick,
     redirectToCheckout,
     cartCount,
-    shouldDisplayCart,
+    shouldDisplayCart
   } = useShoppingCart()
   return (
     <div
       aria-hidden={shouldDisplayCart ? 'false' : 'true'}
-      css={{ overflowY: 'scroll', display: 'flex', flexDiretion: 'row' }}
+      css={{ overflowY: 'scroll', display: 'flex', flexDirection: 'row' }}
     >
       <aside
         sx={{
           variant: shouldDisplayCart
             ? 'aside.rightPaneShow'
-            : 'aside.rightPaneHidden',
+            : 'aside.rightPaneHidden'
         }}
       >
         <ShoppingCartDetails />
@@ -29,7 +29,7 @@ const RightPane = () => {
             display: 'flex',
             flexDirection: 'row',
             justifyContent: 'space-evenly',
-            alignItems: 'center',
+            alignItems: 'center'
           }}
         >
           <Button
@@ -44,7 +44,7 @@ const RightPane = () => {
             arial-label={`Go to Stripe Checkout`}
             variant={'contained'}
             sx={{
-              variant: cartCount > 0 ? 'button.cart' : 'button.disabled',
+              variant: cartCount > 0 ? 'button.cart' : 'button.disabled'
             }}
             onClick={() => redirectToCheckout()}
           >
