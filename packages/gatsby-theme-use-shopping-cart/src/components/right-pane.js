@@ -13,10 +13,11 @@ const RightPane = () => {
   } = useShoppingCart()
   return (
     <div
-      aria-hidden={shouldDisplayCart ? 'false' : 'true'}
+      tabIndex={shouldDisplayCart ? 0 : -1}
       css={{ overflowY: 'scroll', display: 'flex', flexDirection: 'row' }}
     >
       <aside
+        tabIndex={shouldDisplayCart ? 0 : -1}
         sx={{
           variant: shouldDisplayCart
             ? 'aside.rightPaneShow'
@@ -33,6 +34,7 @@ const RightPane = () => {
           }}
         >
           <Button
+            tabIndex={shouldDisplayCart ? 0 : -1}
             variant={'contained'}
             color={'primary'}
             sx={{ variant: 'button.cart' }}
@@ -41,6 +43,7 @@ const RightPane = () => {
             Close
           </Button>
           <Button
+            tabIndex={shouldDisplayCart ? 0 : -1}
             arial-label={`Go to Stripe Checkout`}
             variant={'contained'}
             sx={{

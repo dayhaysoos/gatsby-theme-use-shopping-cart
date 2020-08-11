@@ -12,6 +12,7 @@ const ShoppingCartDetails = () => {
     setItemQuantity,
     cartDetails,
     redirectToCheckout,
+    shouldDisplayCart
   } = useShoppingCart()
 
   const options = []
@@ -23,28 +24,37 @@ const ShoppingCartDetails = () => {
     )
 
   return (
-    <Box>
-      <Flex sx={{ justifyContent: 'space-around' }}>
+    <Box tabIndex={shouldDisplayCart ? 0 : -1}>
+      <Flex
+        tabIndex={shouldDisplayCart ? 0 : -1}
+        sx={{ justifyContent: 'space-around' }}
+      >
         <Box sx={{ flex: 3 }}>Product</Box>
         <Box sx={{ flex: [2, 1] }}>Price</Box>
         <Box sx={{ flex: [2, 1] }}>Qty</Box>
       </Flex>
-      <Box sx={{ marginTop: '20px' }}>
+      <Box tabIndex={shouldDisplayCart ? 0 : -1} sx={{ marginTop: '20px' }}>
         {Object.keys(cartDetails).map((item) => {
           const cartItem = cartDetails[item]
 
           return (
             <Box sx={{ marginBottom: '10px' }}>
-              <Flex key={cartItem.name} sx={{ justifyContent: 'space-around' }}>
+              <Flex
+                tabIndex={shouldDisplayCart ? 0 : -1}
+                key={cartItem.name}
+                sx={{ justifyContent: 'space-around' }}
+              >
                 <Flex
+                  tabIndex={shouldDisplayCart ? 0 : -1}
                   sx={{
                     flex: 3,
                     justifyContent: 'flex-start',
-                    alignItems: 'center',
+                    alignItems: 'center'
                   }}
                 >
                   {/* <span sx={{ margin: 0 }}>{cartItem.name}</span> */}
                   <Image
+                    tabIndex={shouldDisplayCart ? 0 : -1}
                     alt={cartItem.name}
                     sx={{ width: '20%' }}
                     src={cartItem.images[0]}
@@ -56,8 +66,12 @@ const ShoppingCartDetails = () => {
                 <p sx={{ flex: [2, 1], margin: 0, fontSize: ['16px', '24px'] }}>
                   {cartItem.formattedValue}
                 </p>
-                <Flex sx={{ flex: [2, 1] }}>
+                <Flex
+                  tabIndex={shouldDisplayCart ? 0 : -1}
+                  sx={{ flex: [2, 1] }}
+                >
                   <select
+                    tabIndex={shouldDisplayCart ? 0 : -1}
                     sx={{ flex: 1 }}
                     id="quantity-select"
                     value={cartItem.quantity}
@@ -71,13 +85,15 @@ const ShoppingCartDetails = () => {
                 </Flex>
               </Flex>
               <Box
+                tabIndex={shouldDisplayCart ? 0 : -1}
                 sx={{
                   textAlign: 'right',
                   lineHeight: '10px',
-                  marginBottom: '1px',
+                  marginBottom: '1px'
                 }}
               >
                 <a
+                  tabIndex={shouldDisplayCart ? 0 : -1}
                   href={''}
                   onClick={(event) => {
                     event.preventDefault()
