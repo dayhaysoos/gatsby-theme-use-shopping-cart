@@ -1,59 +1,52 @@
 /** @jsx jsx */
 import React from 'react'
 import { useShoppingCart } from 'use-shopping-cart'
-import { jsx } from 'theme-ui'
+import { jsx, Button, Flex } from 'theme-ui'
 import { FaShoppingCart } from 'react-icons/fa'
 
 const ShoppingCartIcon = () => {
   const { cartCount, handleCartClick, shouldDisplayCart } = useShoppingCart()
 
   return (
-    <button
-      aria-label={'Shopping Cart'}
-      onClick={handleCartClick}
+    <Button
       sx={{
-        display: 'flex',
-        color: 'secondary',
-        border: 'none',
-        justifyContent: 'center',
-        padding: 0,
-        backgroundColor: 'transparent',
-        width: '60px',
-        cursor: 'pointer',
         transition: 'all .2s ease',
-        fontWeight: '800',
-        outline: 'none',
-        fontSize: '1.1rem',
-        position: 'relative',
+        height: '36px',
+        width: '36px',
         '&:hover': {
-          transform: 'scale(1.1)',
-        },
+          transform: 'scale(1.1)'
+        }
       }}
+      aria-label={`Shopping Cart with ${cartCount} ${
+        cartCount === 1 ? 'item' : 'items'
+      }`}
+      onClick={handleCartClick}
     >
-      <FaShoppingCart size={30} />
-      {cartCount > 0 && (
-        <span
-          sx={{
-            display: 'flex',
-            justifyContent: 'center',
-            alignItems: 'center',
-            position: 'absolute',
-            right: '2px',
-            bottom: ['35px', '15px', '15px'],
-            border: '1px solid',
-            borderColor: 'accent',
-            borderRadius: '50%',
-            height: '24px',
-            width: '24px',
-            backgroundColor: 'accent',
-            color: 'primaryText',
-            fontSize: '.75rem',
-          }}
-        >
-          {cartCount}
-        </span>
-      )}
-    </button>
+      <div>
+        <FaShoppingCart size={30} />
+        {cartCount === 0 ? null : (
+          <Flex
+            as="span"
+            sx={{
+              position: 'relative',
+              justifyContent: 'center',
+              alignItems: 'center',
+              bottom: '20px',
+              border: '1px solid',
+              bottom: '46px',
+              left: '24px',
+              borderColor: 'accent',
+              borderRadius: '50%',
+              height: '24px',
+              width: '24px',
+              backgroundColor: 'accent'
+            }}
+          >
+            {cartCount}
+          </Flex>
+        )}
+      </div>
+    </Button>
   )
 }
 
