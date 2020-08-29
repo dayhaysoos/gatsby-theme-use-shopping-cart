@@ -1,5 +1,5 @@
 import React from 'react'
-import { Box, Flex, Image, Button } from 'theme-ui'
+import { Box, Flex, Button } from 'theme-ui'
 import { useShoppingCart, formatCurrencyString } from 'use-shopping-cart'
 import Img from 'gatsby-image'
 
@@ -10,7 +10,7 @@ const Product = ({ product }) => {
     images,
     description,
     fields: { price },
-    childFile: { childImageSharp },
+    childFile: { childImageSharp }
   } = product
 
   const { unit_amount } = price
@@ -19,7 +19,7 @@ const Product = ({ product }) => {
       sx={{
         flexDirection: ['column', 'row', 'row'],
         justifyContent: 'center',
-        alignContent: 'center',
+        alignContent: 'center'
       }}
     >
       <Box sx={{ flex: 1 }}>
@@ -30,19 +30,22 @@ const Product = ({ product }) => {
           flex: 1,
           flexDirection: 'column',
           justifyContent: 'center',
-          alignItems: 'center',
+          alignItems: 'center'
         }}
       >
-        <Box>
+        <Flex sx={{ flexDirection: 'column', alignItems: 'center' }}>
           <h1>{name}</h1>
-          <h3>
-            {formatCurrencyString({ value: unit_amount, currency: 'usd' })}
-          </h3>
           <h3>{description}</h3>
-          <Button onClick={() => addItem({ ...product, sku: price.priceID })}>
+          <h4>
+            {formatCurrencyString({ value: unit_amount, currency: 'usd' })}
+          </h4>
+          <Button
+            sx={{ padding: 15 }}
+            onClick={() => addItem({ ...product, sku: price.priceID })}
+          >
             Add To Cart
           </Button>
-        </Box>
+        </Flex>
       </Flex>
     </Flex>
   )
