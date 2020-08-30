@@ -59,7 +59,8 @@ const Products = ({ data }) => {
                     display: 'flex',
                     flexDirection: 'column',
                     justifyContent: 'center',
-                    textDecoration: 'none'
+                    textDecoration: 'none',
+                    variant: 'styles.a'
                   }}
                   to={slug}
                 >

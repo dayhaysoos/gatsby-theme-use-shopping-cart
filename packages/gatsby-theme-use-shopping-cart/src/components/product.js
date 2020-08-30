@@ -1,5 +1,5 @@
-import React from 'react'
-import { Box, Flex, Button } from 'theme-ui'
+/**@jsx jsx */
+import { Box, Flex, Button, jsx, Heading } from 'theme-ui'
 import { useShoppingCart, formatCurrencyString } from 'use-shopping-cart'
 import Img from 'gatsby-image'
 
@@ -34,11 +34,11 @@ const Product = ({ product }) => {
         }}
       >
         <Flex sx={{ flexDirection: 'column', alignItems: 'center' }}>
-          <h1>{name}</h1>
-          <h3>{description}</h3>
-          <h4>
+          <Heading as="h1">{name}</Heading>
+          <Heading as="h2">{description}</Heading>
+          <Heading as="h3">
             {formatCurrencyString({ value: unit_amount, currency: 'usd' })}
-          </h4>
+          </Heading>
           <Button
             sx={{ padding: 15 }}
             onClick={() => addItem({ ...product, sku: price.priceID })}

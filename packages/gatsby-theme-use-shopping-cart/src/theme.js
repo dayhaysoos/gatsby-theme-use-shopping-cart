@@ -2,12 +2,12 @@ const theme = {
   breakpoints: ['40em', '60em', '70em'],
   space: [0, 4, 8, 1, 32],
   fonts: {
-    body: '-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif',
+    body: '-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif'
   },
   fontSizes: [16, 18, 20, 22, 27, 36],
   lineHeights: {
     body: 1.45,
-    heading: 1.1,
+    heading: 1.1
   },
   colors: {
     text: '#000',
@@ -20,19 +20,33 @@ const theme = {
     primaryText: '#fff',
     secondaryText: 'wiblackte',
     accent: '#cc00ff',
-    hightlight: 'yellow',
+    hightlight: 'yellow'
   },
   sizes: {
     default: '100%',
-    max: '100%',
+    max: '100%'
+  },
+  heading: {
+    fontFamily: 'heading',
+    fontWeight: 'heading',
+    lineHeight: 'heading',
+    marginBottom: 20,
+    color: 'primary'
   },
   styles: {
+    a: {
+      color: 'primary',
+      '&:hover': {
+        color: 'secondary'
+      }
+    },
+    // old below
     Layout: {
       color: 'gray.2',
       fontFamily: 'body',
       fontSize: 1,
       lineHeight: 'body',
-      overflowX: 'hidden',
+      overflowX: 'hidden'
     },
     Header: {
       color: 'text',
@@ -41,25 +55,25 @@ const theme = {
       margin: '0 auto',
       padding: 10,
       width: 'default',
-      justifyContent: 'space-between',
+      justifyContent: 'space-between'
     },
     Main: {
       display: 'flex',
       flexDirection: 'column',
       color: 'primary',
       backgroundColor: 'background',
-      alignItems: 'center',
+      alignItems: 'center'
     },
     Container: {
-      padding: 3,
+      padding: 3
     },
     h1: {
-      color: 'gray.3',
+      color: 'primary',
       fontSize: 5,
       fontWeight: 'bold',
       lineHeight: 'heading',
       margin: '0',
-      marginTop: 200,
+      marginTop: 200
     },
     ul: {
       display: 'flex',
@@ -69,7 +83,7 @@ const theme = {
       listStyle: 'none',
       padding: 0,
       maxWidth: 'max',
-      width: 'default',
+      width: 'default'
     },
     li: {
       margin: '20px 10px',
@@ -77,21 +91,21 @@ const theme = {
       flexDirection: 'column',
       '&:focus-within, &:hover': {
         backgroundColor: 'primary',
-        color: 'text',
+        color: 'text'
       },
       '@media (max-width: 680px)': {
-        margin: '10px 0',
-      },
+        margin: '10px 0'
+      }
     },
     p: {
       color: 'gray.2',
       textAlign: 'center',
       fontSize: '2rem',
-      margin: '0',
+      margin: '0'
     },
     div: {
-      color: 'primary',
-    },
+      color: 'primary'
+    }
   },
   span: {
     cartCount: {
@@ -108,15 +122,15 @@ const theme = {
       width: '24px',
       backgroundColor: 'accent',
       color: 'primaryText',
-      fontSize: '.75rem',
-    },
+      fontSize: '.75rem'
+    }
   },
   li: {
     navItem: {
       height: '40px',
       width: '40px',
       listStyle: 'none',
-      textAlign: 'center',
+      textAlign: 'center'
     },
     checkout: {
       listStyle: 'none',
@@ -133,8 +147,8 @@ const theme = {
         maxWidth: 360,
         flexGrow: 1,
         flexShrink: 1,
-        flexBasis: '300px',
-      },
+        flexBasis: '300px'
+      }
     },
     purchaseItem: {
       backgroundColor: 'background',
@@ -151,12 +165,12 @@ const theme = {
       flexBasis: '20%',
       '&:focus-within, &:hover': {},
       '@media (max-width: 900px)': {
-        flexBasis: '50%',
+        flexBasis: '50%'
       },
       '@media (max-width: 680px)': {
-        margin: '10px 0',
-      },
-    },
+        margin: '10px 0'
+      }
+    }
   },
   button: {
     disabled: {
@@ -167,7 +181,7 @@ const theme = {
       fontSize: '16px',
       transition: 'all .5s ease',
       outline: 'none',
-      minWidth: '70px',
+      minWidth: '70px'
     },
     donationOption: {
       color: 'primaryText',
@@ -175,7 +189,7 @@ const theme = {
       height: '50px',
       borderRadius: '5px',
       fontSize: '24px',
-      margin: '10px 10px',
+      margin: '10px 10px'
     },
     cart: {
       backgroundColor: 'primary',
@@ -183,8 +197,8 @@ const theme = {
       fontSize: '16px',
       '&:hover': {
         backgroundColor: 'secondary',
-        borderColor: 'secondary',
-      },
+        borderColor: 'secondary'
+      }
     },
     cartIcon: {
       display: 'flex',
@@ -201,8 +215,8 @@ const theme = {
       outline: 'none',
       fontSize: '1.1rem',
       '&:hover': {
-        transform: 'scale(1.1)',
-      },
+        transform: 'scale(1.1)'
+      }
     },
     checkout: {
       backgroundColor: 'primary',
@@ -216,7 +230,7 @@ const theme = {
       minWidth: '70px',
       '&:hover': {
         color: 'secondary',
-        borderColor: 'secondary',
+        borderColor: 'secondary'
       },
       addRemove: {
         backgroundColor: 'primary',
@@ -227,11 +241,11 @@ const theme = {
         '&:hover': {
           color: 'secondary',
           border: '1px solid',
-          borderColor: 'secondary',
+          borderColor: 'secondary'
         },
         '&:active': {
-          backgroundColor: 'gray.2',
-        },
+          backgroundColor: 'gray.2'
+        }
       },
       closeWindow: {
         backgroundColor: 'none',
@@ -240,54 +254,55 @@ const theme = {
         outline: 'none',
         border: 'none',
         '&:active': {
-          backgroundColor: 'secondary',
-        },
-      },
-    },
+          backgroundColor: 'secondary'
+        }
+      }
+    }
   },
+  //old below
   link: {
     image: {
       display: 'flex',
-      justifyContent: 'center',
-    },
+      justifyContent: 'center'
+    }
   },
   section: {
     itemDetails: {
       textAlign: 'center',
       margin: '0 auto',
       minWidth: '200px',
-      maxWidth: '250px',
+      maxWidth: '250px'
     },
     buttonWrapper: {
       display: 'flex',
       justifyContent: 'center',
-      flexWrap: 'wrap',
+      flexWrap: 'wrap'
     },
     checkout: {
       display: 'flex',
       justifyContent: 'center',
-      alignItems: 'center',
+      alignItems: 'center'
     },
     donateForm: {
       display: 'flex',
       flexDirection: 'column',
       width: '300px',
-      margin: '0 auto',
-    },
+      margin: '0 auto'
+    }
   },
   main: {
     checkout: {
       textAlign: 'center',
       color: 'primary',
-      width: '100%',
-    },
+      width: '100%'
+    }
   },
   ul: {
     checkout: {
       display: 'flex',
       justifyContent: 'space-around',
       flexWrap: 'wrap',
-      padding: 0,
+      padding: 0
     },
     skuList: {
       display: 'flex',
@@ -300,9 +315,9 @@ const theme = {
       minWidth: '40px',
       padding: 0,
       '@media (max-width: 680px)': {
-        flexDirection: 'column',
-      },
-    },
+        flexDirection: 'column'
+      }
+    }
   },
   img: {
     checkout: {
@@ -313,8 +328,8 @@ const theme = {
       maxWidth: '50px',
       transition: 'all .5s ease',
       '@media (max-width: 680px)': {
-        display: 'none',
-      },
+        display: 'none'
+      }
     },
     skuList: {
       width: '100%',
@@ -322,24 +337,24 @@ const theme = {
       minHeight: '50px',
       minWidth: '50px',
       maxWidth: '200px',
-      transition: 'all .5s ease',
+      transition: 'all .5s ease'
     },
     cartList: {
       width: '50px',
       height: '50px',
       minWidth: '40px',
-      minHeight: '50px',
-    },
+      minHeight: '50px'
+    }
   },
   field: {
     checkout: {
       width: '50px',
       textAlign: 'right',
-      color: 'text',
+      color: 'text'
     },
     error: {
-      color: 'red',
-    },
+      color: 'red'
+    }
   },
   div: {
     test: { color: 'red' },
@@ -347,17 +362,17 @@ const theme = {
       width: '100%',
       display: 'flex',
       flexDirection: 'row',
-      justifyContent: 'flex-end',
+      justifyContent: 'flex-end'
     },
     checkout: {
       display: 'flex',
       flexDirection: 'column',
-      marginLeft: '5px',
+      marginLeft: '5px'
     },
     closeWindow: {
       display: 'flex',
-      justifyContent: 'flex-end',
-    },
+      justifyContent: 'flex-end'
+    }
   },
   aside: {
     rightPaneHidden: {
@@ -377,8 +392,8 @@ const theme = {
       zIndex: 100,
       overflow: 'hidden',
       '@media (max-width: 680px)': {
-        visibility: 'hidden',
-      },
+        visibility: 'hidden'
+      }
     },
     rightPaneShow: {
       position: 'fixed',
@@ -395,9 +410,9 @@ const theme = {
       zIndex: 100,
       boxShadow: '0 15px 10px',
       '@media (max-width: 900px)': {
-        width: '75%',
-      },
-    },
+        width: '75%'
+      }
+    }
   },
   cartDetails: {
     container: {
@@ -407,12 +422,12 @@ const theme = {
       paddingLeft: '10px',
       borderBottom: '1px solid gray',
       fontSize: '12px',
-      backgroundColor: 'background',
+      backgroundColor: 'background'
     },
     inputContainer: {
       display: 'flex',
       justifyContent: 'space-between',
-      width: '75px',
+      width: '75px'
     },
     itemContainer: {
       listStyle: 'none',
@@ -421,15 +436,15 @@ const theme = {
       alignItems: 'center',
       paddingLeft: '10px',
       borderBottom: '1px dotted lightgray',
-      color: 'primary',
+      color: 'primary'
     },
     productContainer: {
       display: 'flex',
       justifyContent: 'space-between',
       width: '40%',
-      fontSize: '14px',
-    },
-  },
+      fontSize: '14px'
+    }
+  }
 }
 
 export default theme
