@@ -3,6 +3,11 @@ require("dotenv").config({
 });
 
 module.exports = {
+  siteMetadata: {
+    title: `MilagrowCBD`,
+    description: ``,
+    author: `@gatsbyjs`,
+  },
   plugins: [
     {
       resolve: "gatsby-theme-use-shopping-cart",

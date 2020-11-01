@@ -1,51 +1,56 @@
-/** @jsx jsx */
-import React from 'react'
-import { useShoppingCart } from 'use-shopping-cart'
-import { jsx, Button, Flex } from 'theme-ui'
-import { FaShoppingCart } from 'react-icons/fa'
+import React from "react"
+import { FaShoppingCart } from "react-icons/fa"
+import { Button, Flex } from "theme-ui"
+import { useShoppingCart } from "use-shopping-cart"
 
-const ShoppingCartIcon = () => {
-  const { cartCount, handleCartClick, shouldDisplayCart } = useShoppingCart()
+function ShoppingCartIcon() {
+  const { cartCount, handleCartClick } = useShoppingCart()
+
+  const cartCountDescription = cartCount === 1 ?
+    'There is 1 item in your cart' :
+    `There are ${cartCount} items in your cart`;
 
   return (
     <Button
-      sx={{
-        transition: 'all .2s ease',
-        height: '36px',
-        width: '36px',
-        '&:hover': {
-          transform: 'scale(1.1)'
-        }
-      }}
-      aria-label={`Shopping Cart with ${cartCount} ${
-        cartCount === 1 ? 'item' : 'items'
-      }`}
       onClick={handleCartClick}
+      aria-label="Checkout"
+      aria-describedby="cart-count-description"
+      sx={{
+        display: "flex",
+        transition: "all .2s ease",
+        background: "transparent",
+        padding: 0,
+        "&:hover": {
+          transform: "scale(1.1)",
+        },
+      }}
     >
-      <div>
-        <FaShoppingCart size={30} />
-        {cartCount === 0 ? null : (
-          <Flex
-            as="span"
-            sx={{
-              position: 'relative',
-              justifyContent: 'center',
-              alignItems: 'center',
-              bottom: '20px',
-              border: '1px solid',
-              bottom: '46px',
-              left: '24px',
-              borderColor: 'accent',
-              borderRadius: '50%',
-              height: '24px',
-              width: '24px',
-              backgroundColor: 'accent'
-            }}
-          >
-            {cartCount}
-          </Flex>
-        )}
-      </div>
+      <FaShoppingCart size={30} />
+      {cartCount === 0 ? null : (
+        <Flex
+          as="span"
+          style={{
+            flexDirection: "column",
+            position: "relative",
+            bottom: "16px",
+            right: "8px",
+            backgroundColor: "teal",
+            borderRadius: "50%",
+            height: "32px",
+            width: "32px",
+            justifyContent: "center",
+            backgroundColor: "gray",
+          }}
+        >
+          {cartCount}
+        </Flex>
+      )}
+      <span
+        id="cart-count-description"
+        className="visually-hidden"
+      >
+        {cartCountDescription}
+      </span>
     </Button>
   )
 }

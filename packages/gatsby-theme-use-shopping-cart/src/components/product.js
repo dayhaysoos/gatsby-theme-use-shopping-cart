@@ -1,13 +1,14 @@
 /**@jsx jsx */
-import { Box, Flex, Button, jsx, Heading } from 'theme-ui'
+import { Box, Button, jsx, Grid } from 'theme-ui'
 import { useShoppingCart, formatCurrencyString } from 'use-shopping-cart'
 import Img from 'gatsby-image'
+import SEO from './seo'
 
 const Product = ({ product }) => {
+  console.log('currency', product)
   const { addItem } = useShoppingCart()
   const {
     name,
-    images,
     description,
     fields: { price },
     childFile: { childImageSharp }
@@ -15,39 +16,43 @@ const Product = ({ product }) => {
 
   const { unit_amount } = price
   return (
-    <Flex
-      sx={{
-        flexDirection: ['column', 'row', 'row'],
-        justifyContent: 'center',
-        alignContent: 'center'
-      }}
-    >
-      <Box sx={{ flex: 1 }}>
-        <Img fluid={childImageSharp.fluid} />
-      </Box>
-      <Flex
-        sx={{
-          flex: 1,
-          flexDirection: 'column',
-          justifyContent: 'center',
-          alignItems: 'center'
-        }}
-      >
-        <Flex sx={{ flexDirection: 'column', alignItems: 'center' }}>
-          <Heading as="h1">{name}</Heading>
-          <Heading as="h2">{description}</Heading>
-          <Heading as="h3">
-            {formatCurrencyString({ value: unit_amount, currency: 'usd' })}
-          </Heading>
-          <Button
-            sx={{ padding: 15 }}
-            onClick={() => addItem({ ...product, sku: price.priceID })}
+    <Box sx={{ maxWidth: '768px', margin: '0 auto' }}>
+      <SEO title={name} />
+      <Grid sx={{ color: 'primary', fontWeight: '700' }} columns={[1, 2]}>
+        <Box>
+          <Img alt={`${name}`} fluid={childImageSharp.fluid} />
+        </Box>
+        <Box
+          as="section"
+          sx={{
+            display: 'flex',
+            flexDirection: 'column'
+          }}
+        >
+          <Box
+            sx={{
+              flex: 1,
+              justifyContent: 'center',
+              alignItems: 'center',
+              display: 'flex',
+              flexDirection: 'column'
+            }}
           >
-            Add To Cart
+            <Box as="p">{description}</Box>
+            <Box as="p">
+              {formatCurrencyString({ value: unit_amount, currency: 'USD' })}
+            </Box>
+          </Box>
+          <Button
+            onClick={() => addItem(product)}
+            sx={{ backgroundColor: 'teal' }}
+            alt={`Add ${name} to cart`}
+          >
+            Add to Cart
           </Button>
-        </Flex>
-      </Flex>
-    </Flex>
+        </Box>
+      </Grid>
+    </Box>
   )
 }
 

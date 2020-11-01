@@ -1,9 +1,10 @@
 /** @jsx jsx */
-import { jsx, Grid, Box, Button, Card, Image, Flex } from 'theme-ui'
+import { jsx, Grid, Box, Button, Flex } from 'theme-ui'
 import Layout from '../components/layout'
 import { graphql, Link } from 'gatsby'
 import { formatCurrencyString } from 'use-shopping-cart'
 import Img from 'gatsby-image'
+import { useShoppingCart } from 'use-shopping-cart'
 import ComingSoon from '../components/coming-soon'
 
 export const query = graphql`
@@ -40,50 +41,59 @@ export const query = graphql`
   }
 `
 
-const Products = ({ data }) => {
+function Products({ data }) {
+  const { addItem } = useShoppingCart()
   const products = data.allProduct.nodes
-
   return (
     <Layout>
       {products.length === 0 ? (
         <ComingSoon />
       ) : (
-        <Grid as="section" columns={[1, 2, 4]}>
+        <Grid columns={4}>
           {products.map((product) => {
             const { slug, childFile } = product
-
             return (
-              <Card sx={{ padding: 20 }} key={product.id} as="article">
-                <Link
+              <Box key={slug}>
+                <Img fluid={childFile.childImageSharp.fluid} />
+                <Flex
+                  as={Link}
+                  to={`/products/${slug}`}
                   sx={{
-                    display: 'flex',
+                    paddingTop: '24px',
+                    paddingBottom: '24px',
                     flexDirection: 'column',
+                    color: 'primary',
                     justifyContent: 'center',
-                    textDecoration: 'none',
-                    variant: 'styles.a'
+                    fontWeight: '700',
+                    textDecoration: 'none'
                   }}
-                  to={slug}
                 >
-                  {product.images && (
-                    <Img fluid={childFile.childImageSharp.fluid} />
-                  )}
-                  <Flex
-                    sx={{
-                      flexDirection: 'column',
-                      justifyContent: 'center',
-                      alignItems: 'flex-start'
-                    }}
-                  >
-                    <h4 sx={{ marginBottom: 10 }}>{product.name}</h4>
-                    <span>
-                      {formatCurrencyString({
-                        value: product.fields.price.unit_amount,
+                  <Box as="p">{product.name}</Box>
+                  <Box as="p">
+                    {formatCurrencyString({
+                      value: product.fields.price.unit_amount,
+                      currency: 'usd'
+                    })}
+                  </Box>
+                  <Box as="p">{product.description}</Box>
+                </Flex>
+
+                <Flex sx={{ justifyContent: 'center' }}>
+                  <Button
+                    onClick={() =>
+                      addItem({
+                        ...product,
+                        price: product.fields.price.unit_amount,
                         currency: 'usd'
-                      })}
-                    </span>
-                  </Flex>
-                </Link>
-              </Card>
+                      })
+                    }
+                    sx={{ backgroundColor: 'teal' }}
+                    alt={`Add ${product.name} to cart`}
+                  >
+                    Add to Cart
+                  </Button>
+                </Flex>
+              </Box>
             )
           })}
         </Grid>

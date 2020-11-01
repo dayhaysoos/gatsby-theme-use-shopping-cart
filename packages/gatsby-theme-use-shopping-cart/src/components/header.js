@@ -1,147 +1,43 @@
-/**@jsx jsx */
-import { jsx, Box, Flex, NavLink } from 'theme-ui'
-import { Link, navigate } from 'gatsby'
-import ShoppingCartIcon from './shopping-cart-icon'
-import { Menu, MenuItem, Button } from '@material-ui/core'
-import { MdMenu } from 'react-icons/md'
-import { useShoppingCart } from 'use-shopping-cart'
-import Logo from '../components/logo'
+import React from 'react'
+import { NavLink, Flex, Box } from 'theme-ui'
+import { Link } from 'gatsby'
+import PropTypes from 'prop-types'
+import ShoppingCartIcon from '../components/shopping-cart-icon'
 
-const Header = ({ links, logo, backgroundColor }) => {
-  return (
+const Header = ({ siteTitle }) => (
+  <Box
+    as="header"
+    sx={{
+      backgroundColor: `primary`,
+      marginBottom: `1.45rem`
+    }}
+  >
     <Flex
-      p={10}
       as="nav"
-      sx={{ justifyContent: 'space-evenly', backgroundColor }}
+      style={{
+        margin: `0 auto`,
+        maxWidth: 960,
+        padding: `1.45rem 1.0875rem`,
+        justifyContent: 'space-evenly'
+      }}
     >
-      {links.map((link) => (
-        <NavLink
-          as={Link}
-          key={link}
-          sx={{
-            color: 'primaryText',
-            display: 'flex',
-            alignItems: 'center'
-          }}
-          to={link === 'home' ? '/' : `/${link}`}
-        >
-          {link.toUpperCase()}
-        </NavLink>
-      ))}
+      <NavLink to={'/'} as={Link}>
+        Home
+      </NavLink>
+      <NavLink to={'/products'} as={Link}>
+        Products
+      </NavLink>
       <ShoppingCartIcon />
     </Flex>
-  )
+  </Box>
+)
+
+Header.propTypes = {
+  siteTitle: PropTypes.string
 }
+
+Header.defaultProps = {
+  siteTitle: ``
+}
+
 export default Header
-
-// /** @jsx jsx */
-// import { jsx, Box } from 'theme-ui'
-// import { useState } from 'react'
-// import { Link, navigate } from 'gatsby'
-// import ShoppingCartIcon from './shopping-cart-icon'
-// import { Menu, MenuItem, Button } from '@material-ui/core'
-// import { MdMenu } from 'react-icons/md'
-// import { useShoppingCart } from 'use-shopping-cart'
-// import Logo from '../components/logo'
-
-// const Header = ({ links, logo, backgroundColor }) => {
-//   const { handleCloseCart, shouldDisplayCart } = useShoppingCart()
-//   const [anchorEl, setAnchorEl] = useState(null)
-
-//   const handleClick = (e) => {
-//     handleCloseCart()
-//     setAnchorEl(e.currentTarget)
-//   }
-
-//   const handleClose = () => {
-//     handleCloseCart()
-//     setAnchorEl(null)
-//   }
-
-//   const changeRoute = (route) => {
-//     handleCloseCart()
-//     navigate(route)
-//   }
-//   return (
-//     <Box
-//       sx={{
-//         color: 'primaryText',
-//         backgroundColor,
-//         fontWeight: 'bold',
-//         margin: '0 auto',
-//         padding: 10,
-//         width: 'default',
-//         justifyContent: 'space-between',
-//       }}
-//     >
-//       <div
-//         sx={{
-//           display: 'flex',
-//           justifyContent: 'space-around',
-//           width: '100%',
-//           '@media(max-width: 675px)': {
-//             display: 'none',
-//           },
-//         }}
-//       >
-//         {links.map((link) => (
-//           <Link
-//             key={link}
-//             sx={{
-//               color: 'primaryText',
-//               display: 'flex',
-//               alignItems: 'center',
-//             }}
-//             to={link === 'home' ? '/' : `/${link}`}
-//           >
-//             {link.toUpperCase()}
-//           </Link>
-//         ))}
-//         <ShoppingCartIcon />
-//       </div>
-//       <div
-//         sx={{
-//           display: 'none',
-//           '@media(max-width: 675px)': {
-//             display: 'flex',
-//             justifyContent: 'space-between',
-//             width: '100%',
-//           },
-//         }}
-//       >
-//         <Button
-//           aria-controls="nav-menu"
-//           aria-haspopup="true"
-//           onClick={handleClick}
-//           sx={{
-//             color: 'primaryText',
-//           }}
-//         >
-//           <MdMenu sx={{ color: 'primaryText' }} size={'2em'} />
-//         </Button>
-//         <Menu
-//           id="simple-menu"
-//           anchorEl={anchorEl}
-//           keepMounted
-//           open={Boolean(anchorEl)}
-//           onClose={handleClose}
-//           sx={{ display: 'flex', flexDirection: 'column' }}
-//         >
-//           {links.map((link) => (
-//             <MenuItem
-//               sx={{ width: '100%' }}
-//               key={link}
-//               onClick={() => changeRoute(link === 'home' ? '/' : link)}
-//             >
-//               {link.toUpperCase()}
-//             </MenuItem>
-//           ))}
-//         </Menu>
-//         <Logo logo={logo} />
-//         <ShoppingCartIcon />
-//       </div>
-//     </Box>
-//   )
-// }
-
-// export default Header
