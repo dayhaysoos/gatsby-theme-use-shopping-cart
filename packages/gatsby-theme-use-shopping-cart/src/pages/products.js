@@ -62,7 +62,7 @@ function Products({ data }) {
                     paddingTop: '24px',
                     paddingBottom: '24px',
                     flexDirection: 'column',
-                    color: 'primary',
+                    color: 'text',
                     justifyContent: 'center',
                     fontWeight: '700',
                     textDecoration: 'none'

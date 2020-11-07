@@ -5,7 +5,6 @@ import Img from 'gatsby-image'
 import SEO from './seo'
 
 const Product = ({ product }) => {
-  console.log('currency', product)
   const { addItem } = useShoppingCart()
   const {
     name,
@@ -18,7 +17,7 @@ const Product = ({ product }) => {
   return (
     <Box sx={{ maxWidth: '768px', margin: '0 auto' }}>
       <SEO title={name} />
-      <Grid sx={{ color: 'primary', fontWeight: '700' }} columns={[1, 2]}>
+      <Grid sx={{ color: 'text', fontWeight: '700' }} columns={[1, 2]}>
         <Box>
           <Img alt={`${name}`} fluid={childImageSharp.fluid} />
         </Box>
