@@ -43,7 +43,7 @@ function CheckoutDetails() {
           {Object.keys(cartDetails).map((cartItem) => {
             const item = cartDetails[cartItem]
             return (
-              <Box key={item.sku} as="tr" key={item.sku}>
+              <Box key={item.priceID} as="tr">
                 <Box as="td" scope="row">
                   {item.name}
                 </Box>

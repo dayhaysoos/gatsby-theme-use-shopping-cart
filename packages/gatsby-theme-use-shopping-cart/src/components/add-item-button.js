@@ -24,8 +24,8 @@ const AddItemButton = ({ sku }) => {
         color: 'primaryText',
         '&:hover': {
           backgroundColor: 'accent',
-          borderColor: 'secondary',
-        },
+          borderColor: 'secondary'
+        }
       }}
       onClick={handleClick}
     >

@@ -1,7 +1,7 @@
-import React from "react";
-import { graphql } from "gatsby";
-import Product from "../components/product";
-import Layout from "../components/layout";
+import React from 'react'
+import { graphql } from 'gatsby'
+import Product from '../components/product'
+import Layout from '../components/layout'
 
 export const query = graphql`
   query($slug: String!) {
@@ -11,6 +11,8 @@ export const query = graphql`
       productID
       images
       price
+      priceID
+      id
       childFile {
         childImageSharp {
           id
@@ -34,14 +36,14 @@ export const query = graphql`
       }
     }
   }
-`;
+`
 
 const ProductTemplate = ({ data }) => {
   return (
     <Layout>
       <Product product={data.product} />
     </Layout>
-  );
-};
+  )
+}
 
-export default ProductTemplate;
+export default ProductTemplate

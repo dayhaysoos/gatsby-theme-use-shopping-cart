@@ -43,7 +43,7 @@ const Product = ({ product }) => {
             </Box>
           </Box>
           <Button
-            onClick={() => addItem(product)}
+            onClick={() => addItem({ ...product, sku: product.priceID })}
             sx={{ backgroundColor: 'teal' }}
             alt={`Add ${name} to cart`}
           >

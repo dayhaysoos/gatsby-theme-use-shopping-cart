@@ -13,12 +13,6 @@ module.exports = {
     `gatsby-transformer-sharp`,
     `gatsby-plugin-react-helmet`,
     'gatsby-plugin-stripe',
-    // {
-    //   resolve: 'gatsby-theme-stripe-base',
-    //   options: {
-    //     stripePublicKey: process.env.STRIPE_API_PUBLIC,
-    //   },
-    // },
     {
       resolve: `gatsby-plugin-sharp`,
       options: {
