@@ -53,11 +53,9 @@ function Products({ data }) {
           {products.map((product) => {
             const { slug, childFile } = product
             return (
-              <Box key={slug}>
+              <Box as={Link} to={`/products/${slug}`} key={slug}>
                 <Img fluid={childFile.childImageSharp.fluid} />
                 <Flex
-                  as={Link}
-                  to={`/products/${slug}`}
                   sx={{
                     paddingTop: '24px',
                     paddingBottom: '24px',

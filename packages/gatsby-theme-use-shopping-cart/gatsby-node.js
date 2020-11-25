@@ -109,11 +109,9 @@ exports.onCreateNode = async ({
 }) => {
   // Create a unique Product for every Price
   if (node.internal.type === 'Price' && !products.includes(node.product.id)) {
-    const productNodeId = await createNodeId(`Product-${node.product.id}`)
-
     let fileNode = await createRemoteFileNode({
       url: node.product.images[0],
-      parentNodeId: productNodeId,
+      parentNodeId: node.priceID,
       createNode,
       createNodeId,
       cache,
@@ -128,7 +126,7 @@ exports.onCreateNode = async ({
 
     await createNode({
       ...node.product,
-      id: productNodeId,
+      id: node.priceID,
       productID: node.product.id,
       slug: slugify(node.product.name),
       price: node.unit_amount,
@@ -140,13 +138,13 @@ exports.onCreateNode = async ({
     })
 
     await createNodeField({
-      node: getNode(productNodeId),
+      node: getNode(node.priceID),
       name: 'price',
       value: node
     })
 
     createParentChildLink({
-      parent: getNode(productNodeId),
+      parent: getNode(node.priceID),
       child: getNode(fileNode.id)
     })
   }

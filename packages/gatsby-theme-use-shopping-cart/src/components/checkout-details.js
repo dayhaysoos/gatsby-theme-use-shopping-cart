@@ -61,7 +61,10 @@ function CheckoutDetails() {
                   <Close
                     aria-label={`Remove ${item.name} from cart`}
                     title={'Remove'}
-                    onClick={() => removeItem(item.sku)}
+                    onClick={(e) => {
+                      e.preventDefault()
+                      removeItem(item.id)
+                    }}
                   />
                 </Box>
               </Box>
