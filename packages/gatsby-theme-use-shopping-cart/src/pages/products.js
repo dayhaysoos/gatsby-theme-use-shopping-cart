@@ -49,7 +49,7 @@ function Products({ data }) {
       {products.length === 0 ? (
         <ComingSoon />
       ) : (
-        <Grid columns={4}>
+        <Grid columns={[1, 2, 4]}>
           {products.map((product) => {
             const { slug, childFile } = product
             return (
