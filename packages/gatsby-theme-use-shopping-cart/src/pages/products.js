@@ -16,6 +16,7 @@ export const query = graphql`
         productID
         images
         slug
+        id
         childFile {
           childImageSharp {
             id
@@ -52,6 +53,7 @@ function Products({ data }) {
         <Grid columns={[1, 2, 4]}>
           {products.map((product) => {
             const { slug, childFile } = product
+            console.log('product', product)
             return (
               <Box key={slug}>
                 <Flex
